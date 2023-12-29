@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { connectToDatabase } from "./api/mongodb";
 import Experience from "./api/schemas/experience";
 import { GetServerSideProps } from "next";
+import { getRepo } from "./api/getRepo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -121,6 +122,7 @@ export default function Home() {
 }
 
 export const getServerSideProps: GetServerSideProps<any> = async () => {
+  const repoData = await getRepo("discount-selenium");
   await connectToDatabase();
   const experience = await Experience.find();
   return {

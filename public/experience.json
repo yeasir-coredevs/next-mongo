@@ -1,0 +1,34 @@
+[
+  {
+    "company": "CoveDevs Ltd.",
+    "position": "Jr. MERN Stack Developer",
+    "duration": "July 2023 - Present",
+    "responsibilities": [
+      "Develop Node JS, Express, and MongoDB back-end.",
+      "Optimize app speed, ensure data security, and manage code changes.",
+      "Integrate payments, build chat apps, contribute to Fintech bot on EVM chains.",
+      "Involved in automation, data gathering, and scalable infrastructure development."
+    ]
+  },
+  {
+    "company": "Exploregent",
+    "position": "MERN Stack Developer Intern",
+    "duration": "April 2023 - October 2023",
+    "responsibilities": [
+      "Designed and implemented responsive UI components with React/Next.",
+      "Coded application interfaces in JavaScript, following React/Next workflows, and troubleshooted interface software for effective debugging.",
+      "Contributed to front-end architecture development, supporting UI concepts.",
+      "Collaborated seamlessly to architect and implement backend APIs."
+    ]
+  },
+  {
+    "company": "Repsoft Consultancy Ltd.",
+    "position": "FrontEnd Developer Intern",
+    "duration": "July 2022 - October 2022",
+    "responsibilities": [
+      "Utilized NodeJs, Express, and HTML/CSS for efficient front-end development.",
+      "Created reusable, testable code while optimizing performance and responsiveness.",
+      "Developed components and transformed Figma/XD files into pixel-perfect web pages."
+    ]
+  }
+]

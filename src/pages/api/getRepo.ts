@@ -1,3 +1,4 @@
+import { GitHubRepo, License } from '@/types/interface';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -31,7 +32,7 @@ export const getRepo = async (repoName: string): Promise<any> => {
     const response: Response = await fetch(`https://api.github.com/repos/Yeasir-Hossain/${repoName}`);
     if (response.status !== 200) return response;
 
-    const repoData: any = await response.json();
+    const repoData: any = formatResponse(await response.json());
 
     // Save data to cache file
     fs.writeFileSync(cacheFilePath, JSON.stringify(repoData));
@@ -40,4 +41,38 @@ export const getRepo = async (repoName: string): Promise<any> => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const formatResponse = (response: any): GitHubRepo => {
+  const license: License | null = response.license ? {
+    key: response.license.key,
+    name: response.license.name,
+    spdx_id: response.license.spdx_id,
+    url: response.license.url,
+    node_id: response.license.node_id,
+  } : null;
+
+  return {
+    id: response.id,
+    node_id: response.node_id,
+    name: response.name,
+    full_name: response.full_name,
+    html_url: response.html_url,
+    description: response.description,
+    created_at: response.created_at,
+    updated_at: response.updated_at,
+    pushed_at: response.pushed_at,
+    homepage: response.homepage,
+    stargazers_count: response.stargazers_count,
+    watchers_count: response.watchers_count,
+    language: response.language,
+    forks_count: response.forks_count,
+    license: license,
+    topics: response.topics,
+    forks: response.forks,
+    open_issues: response.open_issues,
+    watchers: response.watchers,
+    network_count: response.network_count,
+    subscribers_count: response.subscribers_count,
+  };
 };

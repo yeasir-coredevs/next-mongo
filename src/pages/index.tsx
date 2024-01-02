@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { connectToDatabase } from "./api/mongodb";
-import Experience from "./api/schemas/experience";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
+import { GitHubRepo } from "@/types/interface";
 import { getRepo } from "./api/getRepo";
+import experience from "../../public/experience.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export default function Home({ data }: { data: GitHubRepo[] }) {
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -121,13 +121,20 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps<any> = async () => {
-  const repoData = await getRepo("discount-selenium");
-  await connectToDatabase();
-  const experience = await Experience.find();
+export const getServerSideProps: GetServerSideProps = async (): Promise<
+  GetServerSidePropsResult<{ data: GitHubRepo[] }>
+> => {
+  let data: GitHubRepo[] = [];
+  data.push(await getRepo("discount-selenium"));
+  data.push(await getRepo("DJ-the-music-bot"));
+  data.push(await getRepo("electronic-parts-manufacturer"));
+  data.push(await getRepo("bike-warehouse-client"));
+  data.push(await getRepo("Doubly-Linked-List"));
+  data.push(await getRepo("bkash-nodejs-library"));
+  data.push({ ...(await getRepo("download-manager")), inProgress: true });
   return {
     props: {
-      experience,
+      data,
     },
   };
 };
